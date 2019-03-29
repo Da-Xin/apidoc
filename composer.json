@@ -1,0 +1,24 @@
+{
+    "name": "phpdaxin/apidoc",
+    "description": "description",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "enhengs",
+            "email": "daenheng@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpApiDoc\\ApiDocSrc\\": "src/"
+        },
+        "files": [
+            "src/route.php"
+        ]
+    }
+}

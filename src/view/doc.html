@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title}</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+    <style>
+        /* Custom Styles */
+        ul.nav-tabs {
+            width: 200px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+        ul.nav-tabs li {
+            margin: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        ul.nav-tabs li:first-child {
+            border-top: none;
+        }
+
+        ul.nav-tabs li a {
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 0;
+        }
+
+        ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+            color: #fff;
+            background: #0088cc;
+            border: 1px solid #0088cc;
+        }
+
+        ul.nav-tabs li:first-child a {
+            border-radius: 4px 4px 0 0;
+        }
+
+        ul.nav-tabs li:last-child a {
+            border-radius: 0 0 4px 4px;
+        }
+
+        ul.nav-tabs.affix {
+            top: 30px;
+        }
+
+        .class-div {
+            width: 40%;
+            height: 35px;
+            padding: 0px 0px 0px 10px;
+            float: left;
+            display: grid;
+        }
+
+        .class-a {
+            font-size: 16px;
+        }
+
+        .function-div {
+            margin: 10px 0px 10px 20px;
+            float: left;
+        }
+
+        .function-a {
+            height: 35px;
+            display: inline;
+            float: left;
+            font-size: 14px;
+        }
+        .code {
+            font-size: 100%;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+<form class="form-inline">
+    <div class="form-group">
+        <label for="exampleInputName2"><span class="text-muted" style="font-size: 26px;">{$title}</span></label>
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+    </div>
+    <button type="submit" class="btn btn-default">搜索</button>
+</form>
+<div class="">
+    <hr style="color: #9d9d9d;width: 100%;margin-top: 5px;margin-bottom: 8px;">
+</div>
+<div id="class-list">
+    <div class="container row" style="width: 100%;min-width: 1210px;">
+        <div class="alert class-div">
+            <table class="table table-hover">
+                <thead>
+                <tr class="info" style="font-size: 20px;">
+                    <th style="width: 268px;">接口服务</th>
+                    <th style="min-width: 110px;">接口名称</th>
+                    <th style="width: 568px;">接口备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="Addons.Shakefootball show">
+                    <!--glyphicon glyphicon-minus-->
+                    <td scope="row"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Addons.Shakefootball</td>
+                    <td class="text-muted">足球竞技</td>
+                    <td class="text-muted" style="font-size: 10px;">sss</td>
+                </tr>
+                <tr class="AddonsShakefootball" v-for="(value, key) in list">
+                    <td scope="row" @click="details(value)">&emsp;{{value.interface}}</td>
+                    <td class="text-muted">{{value.title}}</td>
+                    <td class="text-muted" style="font-size: 10px;">{{value.desc.desc}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <!--<a class="btn bg-primary class-a" data-toggle="collapse" @click="operation_class(key)">Addons.Shakefootball.App.Index</a>-->
+            <!--<div v-if="value.method.length>0" v-bind:id="'classtitle'+(key+1)" class="collapse in function-div hide">-->
+                <!--<a class="function-a" v-for="(mval, mkey) in value.method" @click="details(mval,value.class)">{{mkey+1}}、{{mval.title}}({{mval.name}})</a>-->
+            <!--</div>-->
+
+        </div>
+        <div class="col-xs-7" style="min-width: 520px;" v-if="Object.keys(info).length > 0">
+            <H1 style="margin-top: 0px;"><kbd class="code">{{info.title}}</kbd></H1>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th class="info" style="width: 80px">请求接口</th>
+                    <th><code class="code">{{info.url}}</code></th>
+                </tr>
+                <tbody>
+                <tr>
+                    <th class="info">文件地址</th>
+                    <th><code class="code">{{info.class_path}}</code></th>
+                </tr>
+                <tr>
+                    <th class="info">方法名称</th>
+                    <th><code class="code">{{info.name}}()</code></th>
+                </tr>
+                <tr>
+                    <th class="info">请求方式</th>
+                    <th><code class="code">{{info.desc.request}}</code></th>
+                </tr>
+                <tr>
+                    <th class="info">信息说明</th>
+                    <th><code>{{info.desc.desc}}</code></th>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover">
+                <caption>接收参数</caption>
+                <thead>
+                <tr class="info">
+                    <th>字段名称</th>
+                    <th>字段类型</th>
+                    <th>是否必须</th>
+                    <th>默认值</th>
+                    <th>说明</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(ipv, ipk) in info.params">
+                    <th scope="row">{{ipv.name}}</th>
+                    <td class="text-muted">{{ipv.type}}</td>
+                    <td v-if="ipv.require == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
+                    <td v-else><kbd>否</kbd></td>
+                    <td>{{ipv.default}}</td>
+                    <td class="text-muted">{{ipv.desc}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover">
+                <caption>返回参数</caption>
+                <thead>
+                <tr class="info">
+                    <th>字段名称</th>
+                    <th>字段类型</th>
+                    <th>是否必须</th>
+                    <th>说明</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(irv, irk) in info.returns">
+                    <th scope="row" v-html="irv.name"></th>
+                    <td class="text-muted" v-html="irv.type"></td>
+                    <td v-if="irv.required == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
+                    <td v-else><kbd>否</kbd></td>
+                    <td class="text-muted" v-html="irv.detail"></td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#class-list',
+        data: {
+            list: JSON.parse('{:json_encode($list,true)}'),
+            info: {}
+        },
+        methods: {
+            operation_class: function (item) {
+                if(document.getElementById('classtitle' + (item + 1)) == null){
+                    return ;
+                }
+                var calsslist = document.getElementById('classtitle' + (item + 1)).classList;
+                if (JSON.stringify(calsslist).indexOf('hide') > 0) {
+                    calsslist.remove('hide');
+                    calsslist.add('show');
+                } else {
+                    calsslist.remove('show');
+                    calsslist.add('hide');
+                }
+            },
+            details: function (item) {
+                this.info = item;
+                console.log(this.info);
+            }
+        }
+    })
+</script>
+</body>
+</html>
