@@ -1,13 +1,14 @@
 Thinkphp5 帮助文档自动生成
 
 使用说明
-    安装：composer require ""
+
+    安装：composer require "phpdaxin/apidoc:dev-master"
     安装完成后，在 application/extra 目录下创建名为 doc.php 的文件。
         配置文件内容如下：
         ```
         <?php
         return [
-            'title' => "DT接口文档",
+            'title' => "接口文档",
             'class' => [
                 'app\index\controller\Index',  // 要生成帮助文档的控制器, 
                 ....

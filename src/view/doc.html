@@ -103,14 +103,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="Addons.Shakefootball show">
-                    <!--glyphicon glyphicon-minus-->
-                    <td scope="row"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Addons.Shakefootball</td>
-                    <td class="text-muted">足球竞技</td>
-                    <td class="text-muted" style="font-size: 10px;">sss</td>
-                </tr>
                 <tr class="AddonsShakefootball" v-for="(value, key) in list">
-                    <td scope="row" @click="details(value)">&emsp;{{value.interface}}</td>
+                    <td scope="row" @click="details(value)">{{value.interface}}</td>
                     <td class="text-muted">{{value.title}}</td>
                     <td class="text-muted" style="font-size: 10px;">{{value.desc.desc}}</td>
                 </tr>

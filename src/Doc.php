@@ -72,10 +72,10 @@ class Doc
             //            ];
         }
         $list = $methods;
-                echo '<pre>';
-                //        print_r($methods);
-                print_r($list);
-                exit;
+//                echo '<pre>';
+//                //        print_r($methods);
+//                print_r($list);
+//                exit;
         $this->view->assign('list', $list);
         $this->view->assign('title', $this->config['title']);
         return $this->view->fetch('doc');
