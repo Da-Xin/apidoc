@@ -63,19 +63,8 @@ class Doc
                 $info['class_path'] = implode('/', $val_array);
                 $methods[$k] = $info;
             }
-            //            $list[] = [
-            //                'title' => $this->Ctitle($val),
-            //                'class' => implode('/', $val_array),
-            ////                'param' => ,
-            //                'class_title' => end($val_array),
-            //                'method' => $methods,
-            //            ];
         }
         $list = $methods;
-//                echo '<pre>';
-//                //        print_r($methods);
-//                print_r($list);
-//                exit;
         $this->view->assign('list', $list);
         $this->view->assign('title', $this->config['title']);
         return $this->view->fetch('doc');

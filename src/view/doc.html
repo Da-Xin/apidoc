@@ -103,16 +103,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="AddonsShakefootball" v-for="(value, key) in list">
-                    <td scope="row" @click="details(value)">{{value.interface}}</td>
+                <tr class="AddonsShakefootball" v-for="(value, key) in list" @click="details(value)">
+                    <td scope="row" >{{value.interface}}</td>
                     <td class="text-muted">{{value.title}}</td>
-                    <td class="text-muted" style="font-size: 10px;">{{value.desc.desc}}</td>
+                    <td class="text-muted">{{value.desc}}</td>
                 </tr>
                 </tbody>
             </table>
             <!--<a class="btn bg-primary class-a" data-toggle="collapse" @click="operation_class(key)">Addons.Shakefootball.App.Index</a>-->
             <!--<div v-if="value.method.length>0" v-bind:id="'classtitle'+(key+1)" class="collapse in function-div hide">-->
-                <!--<a class="function-a" v-for="(mval, mkey) in value.method" @click="details(mval,value.class)">{{mkey+1}}、{{mval.title}}({{mval.name}})</a>-->
+            <!--<a class="function-a" v-for="(mval, mkey) in value.method" @click="details(mval,value.class)">{{mkey+1}}、{{mval.title}}({{mval.name}})</a>-->
             <!--</div>-->
 
         </div>
@@ -134,11 +134,11 @@
                 </tr>
                 <tr>
                     <th class="info">请求方式</th>
-                    <th><code class="code">{{info.desc.request}}</code></th>
+                    <th><code class="code">{{info.request}}</code></th>
                 </tr>
                 <tr>
                     <th class="info">信息说明</th>
-                    <th><code>{{info.desc.desc}}</code></th>
+                    <th><code>{{info.desc}}</code></th>
                 </tr>
                 </tbody>
             </table>
@@ -154,7 +154,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(ipv, ipk) in info.params">
+                <tr v-for="(ipv, ipk) in info.param">
                     <th scope="row">{{ipv.name}}</th>
                     <td class="text-muted">{{ipv.type}}</td>
                     <td v-if="ipv.require == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
@@ -175,7 +175,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(irv, irk) in info.returns">
+                <tr v-for="(irv, irk) in info.return">
                     <th scope="row" v-html="irv.name"></th>
                     <td class="text-muted" v-html="irv.type"></td>
                     <td v-if="irv.required == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>

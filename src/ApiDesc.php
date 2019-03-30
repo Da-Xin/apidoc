@@ -85,7 +85,7 @@ class ApiDesc
 
         if (!isset($item['required'])) {
             $item['request'] = false;
-        }else{
+        } else {
             $item['request'] = $item['required'];
         }
 
@@ -98,12 +98,12 @@ class ApiDesc
             if (!isset($item['default'])) {
                 $item['default'] = '';
             }
-            if ($rule['default'] === null) {
-                $rule['default'] = 'NULL';
-            } elseif (is_array($rule['default'])) {
-                $rule['default'] = json_encode($rule['default']);
-            } elseif (!is_string($rule['default'])) {
-                $rule['default'] = var_export($rule['default'], true);
+            if ($item['default'] === null) {
+                $item['default'] = 'NULL';
+            } elseif (is_array($item['default'])) {
+                $item['default'] = json_encode($rule['default']);
+            } elseif (!is_string($item['default'])) {
+                $item['default'] = var_export($item['default'], true);
             }
         }
         return $item;
