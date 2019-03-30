@@ -1,6 +1,7 @@
 {
     "name": "phpdaxin/apidoc",
     "description": "ThinkPHP5 文档生成工具",
+    "keywords": ["thinkphp5", "api", "doc","php","help"],
     "type": "library",
     "license": "MIT",
     "authors": [
