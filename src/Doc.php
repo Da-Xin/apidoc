@@ -5,21 +5,18 @@
 
 namespace PhpApiDoc\ApiDocSrc;
 
-use think\Config;
-use think\Request;
-use think\View;
-
 class Doc
 {
     private $view;
     private $config;
+    private $fetch;
     private $request;
 
     private $template = [
         'type' => 'Think',
         'view_path' => '',
         'view_suffix' => 'html',
-        'view_depr' => DS,
+        'view_depr' => DIRECTORY_SEPARATOR,
         'tpl_begin' => '{',
         'tpl_end' => '}',
         'taglib_begin' => '{',
@@ -28,10 +25,19 @@ class Doc
 
     public function __construct()
     {
-        $this->request = Request::instance();
-        $this->template['view_path'] = __DIR__ . DS . 'view' . DS;
-        $this->view = View::instance($this->template, []);
-        $this->config = Config::get('doc');
+        if (defined('THINK_VERSION') === false) {
+            $this->request = \think\facade\Request::instance();
+            $this->template['view_path'] = __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
+            $this->view = \think\facade\View::instance($this->template, []);
+            $this->config = \think\facade\Config::get('doc.');
+            $this->fetch = '../../vendor/phpdaxin/apidoc/src/view/doc';
+        } else {
+            $this->request = \think\Request::instance();
+            $this->template['view_path'] = __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
+            $this->view = \think\View::instance($this->template, []);
+            $this->config = \think\Config::get('doc');
+            $this->fetch = 'doc';
+        }
     }
 
     /**
@@ -43,6 +49,7 @@ class Doc
     {
         $class = $this->config['class'];
         $list = $data = [];
+        $url = '';
         foreach ($class as $val) {
             $methods = $this->getMethods($val, 'public');
             $val_array = explode('\\', $val);
@@ -58,7 +65,7 @@ class Doc
                 $info['url'] = $url . $v;
                 $info['name'] = $v;
                 $info['class_name'] = $class_name;
-                $info['class_title'] = $cinfo['title'];
+                $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
                 $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
                 $info['class_path'] = implode('/', $val_array);
                 $methods[$k] = $info;
@@ -67,7 +74,7 @@ class Doc
         $list = $methods;
         $this->view->assign('list', $list);
         $this->view->assign('title', $this->config['title']);
-        return $this->view->fetch('doc');
+        return $this->view->fetch($this->fetch);
     }
 
     /**
