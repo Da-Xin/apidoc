@@ -1,6 +1,6 @@
 {
     "name": "phpdaxin/apidoc",
-    "description": "description",
+    "description": "ThinkPHP5 Automatically generate help/reference documentation",
     "type": "library",
     "license": "MIT",
     "authors": [

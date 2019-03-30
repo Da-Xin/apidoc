@@ -1,12 +1,12 @@
-Thinkphp5 帮助文档自动生成
+ThinkPHP5 自动生成帮助文档
 
 使用说明
 
-    安装：composer require "phpdaxin/apidoc:dev-master"
+    1.安装：composer require "phpdaxin/apidoc:dev-master"
     
-    安装完成后
-        5.0 在 application/extra 目录下创建名为 doc.php 的文件。
-        5.1 在 config 目录下创建名为 doc.php 的文件。
+    2.安装完成：
+        ThinkPHP5.0 在 application/extra 目录下创建名为 doc.php 的文件;
+        ThinkPHP5.1 在 config 目录下创建名为 doc.php 的文件;
         配置文件内容如下：
         ```
         <?php
@@ -18,10 +18,13 @@ Thinkphp5 帮助文档自动生成
             ],
         ];
         ```
-        
-    配置文件配置完成后，对'app\index\controller\Index'文件编写注释参数
-        如下：
+
+    3.配置文件配置完成：
+        编写生成帮助文档注释
+        案列如下(app\index\controller\Index)：
         ```
+        <?php
+        namespace app\index\controller
         /**
          * @title 测试案列
          */
