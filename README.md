@@ -1,4 +1,4 @@
-ThinkPHP5 自动生成帮助文档
+ThinkPHP5 文档生成工具
 
 使用说明
 
