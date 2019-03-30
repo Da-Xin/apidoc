@@ -3,6 +3,8 @@ ThinkPHP5 文档生成工具
 使用说明
 
     1.安装：composer require "phpdaxin/apidoc:dev-master"
+        更新 composer update phpdaxin/apidoc
+        删除 composer remove phpdaxin/apidoc
     
     2.安装完成：
         ThinkPHP5.0 在 application/extra 目录下创建名为 doc.php 的文件;
