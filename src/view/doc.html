@@ -79,19 +79,19 @@
     </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy">
-<form class="form-inline">
+<form class="form-inline" style="margin: 10px 0 0 10px">
     <div class="form-group">
         <label for="exampleInputName2"><span class="text-muted" style="font-size: 26px;">{$title}</span></label>
     </div>
-    <div class="form-group">
-        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
-    </div>
-    <button type="submit" class="btn btn-default">搜索</button>
+    <!--<div class="form-group">-->
+        <!--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="">-->
+    <!--</div>-->
+    <!--<button type="submit" class="btn btn-default">搜索</button>-->
 </form>
 <div class="">
     <hr style="color: #9d9d9d;width: 100%;margin-top: 5px;margin-bottom: 8px;">
 </div>
-<div id="class-list">
+<div id="class-list" v-if="Object.keys(list).length > 0">
     <div class="container row" style="width: 100%;min-width: 1210px;">
         <div class="alert class-div">
             <table class="table table-hover">

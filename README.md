@@ -1,5 +1,10 @@
 ThinkPHP5 文档生成工具
 
+    访问地址:配置的域名/doc?user=user&label=label
+        user：用户
+        label：用户标识
+        user、label 必传且不能为空,且在 doc.php 里的 auth数组中存在,否则无法访问
+
 使用说明
 
     1.安装：composer require "phpdaxin/apidoc:dev-master"
@@ -18,6 +23,11 @@ ThinkPHP5 文档生成工具
                 'app\index\controller\Index',  // 要生成帮助文档的控制器, 
                 ....
             ],
+            // 设置可以访问的人员，可以配置多个 user 和 label
+            'auth'=>[
+                    'user'=>'label',    // user 和 label，就是访问地址里的 user 和 label
+                    'zhangsan'=>'zhangsandemo',
+            ]
         ];
         ```
 

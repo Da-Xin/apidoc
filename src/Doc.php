@@ -5,6 +5,7 @@
 
 namespace PhpApiDoc\ApiDocSrc;
 
+
 class Doc
 {
     private $view;
@@ -47,33 +48,41 @@ class Doc
      */
     public function get()
     {
-        $class = $this->config['class'];
-        $list = $data = [];
-        $url = '';
-        foreach ($class as $val) {
-            $methods = $this->getMethods($val, 'public');
-            $val_array = explode('\\', $val);
-            if ($val_array['0'] == 'addons') {
-                $url = $val_array['0'] . '/execute/' . $val_array['1'] . '-' . strtolower($val_array['3']) . '-';
+        $input = input('param.');
+        $auth = $this->config['auth'];
+        if (isset($input['user']) && !empty($input['user']) && isset($auth[$input['user']]) && isset($input['label']) && !empty($input['label']) && $input['label'] == $auth[$input['user']]) {
+            $title = $this->config['title'];
+            $class = $this->config['class'];
+            $list = $data = [];
+            $url = '';
+            foreach ($class as $val) {
+                $methods = $this->getMethods($val, 'public');
+                $val_array = explode('\\', $val);
+                if ($val_array['0'] == 'addons') {
+                    $url = $val_array['0'] . '/execute/' . $val_array['1'] . '-' . strtolower($val_array['3']) . '-';
+                }
+                $class_name = end($val_array);
+                // 获取类名称
+                $cinfo = (new ApiDesc())->getDesc($val);
+                foreach ($methods as $k => $v) {
+                    // 方法文档信息
+                    $info = (new ApiDesc())->getDesc($val, $v);
+                    $info['url'] = $url . $v;
+                    $info['name'] = $v;
+                    $info['class_name'] = $class_name;
+                    $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
+                    $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
+                    $info['class_path'] = implode('/', $val_array);
+                    $methods[$k] = $info;
+                }
             }
-            $class_name = end($val_array);
-            // 获取类名称
-            $cinfo = (new ApiDesc())->getDesc($val);
-            foreach ($methods as $k => $v) {
-                // 方法文档信息
-                $info = (new ApiDesc())->getDesc($val, $v);
-                $info['url'] = $url . $v;
-                $info['name'] = $v;
-                $info['class_name'] = $class_name;
-                $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
-                $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
-                $info['class_path'] = implode('/', $val_array);
-                $methods[$k] = $info;
-            }
+            $list = $methods;
+        } else {
+            $title = '没有权限访问';
+            $list = [];
         }
-        $list = $methods;
         $this->view->assign('list', $list);
-        $this->view->assign('title', $this->config['title']);
+        $this->view->assign('title', $title);
         return $this->view->fetch($this->fetch);
     }
 
