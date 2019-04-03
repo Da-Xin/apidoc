@@ -157,7 +157,7 @@
                 <tr v-for="(ipv, ipk) in info.param">
                     <th scope="row">{{ipv.name}}</th>
                     <td class="text-muted">{{ipv.type}}</td>
-                    <td v-if="ipv.require == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
+                    <td v-if="ipv.required == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
                     <td v-else><kbd>否</kbd></td>
                     <td>{{ipv.default}}</td>
                     <td class="text-muted">{{ipv.desc}}</td>
