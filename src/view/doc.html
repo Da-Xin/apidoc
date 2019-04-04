@@ -81,7 +81,7 @@
 <body data-spy="scroll" data-target="#myScrollspy">
 <form class="form-inline" style="margin: 10px 0 0 10px">
     <div class="form-group">
-        <label for="exampleInputName2"><span class="text-muted" style="font-size: 26px;">{$title} <div style="font-size:18px;color: #1e70bf;display: contents;">({$url})</div></span></label>
+        <label for="exampleInputName2"><span class="text-muted" style="font-size: 26px;">{$title}</span></label>
     </div>
     <!--<div class="form-group">-->
         <!--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="">-->
@@ -121,7 +121,7 @@
             <table class="table table-bordered table-hover">
                 <tr>
                     <th class="info" style="width: 80px">请求接口</th>
-                    <th><code class="code">{{info.url}}</code></th>
+                    <th><code class="code">{$url}/{{info.url}}</code></th>
                 </tr>
                 <tbody>
                 <tr>
