@@ -19,6 +19,7 @@ ThinkPHP5 文档生成工具
         <?php
         return [
             'title' => "接口文档",
+            'url' => 'http://www.baidu.com',    // 请求链接
             'class' => [
                 'app\index\controller\Index',  // 要生成帮助文档的控制器, 
                 ....
@@ -43,23 +44,18 @@ ThinkPHP5 文档生成工具
         class Index extends Controller
         {
             /**
-             * @title 测试案列函数
+             * @title 测试案列
+             * @url 连接
              * @request GET
-             * @desc  方法详细信息说明
-             * @param {"name":"demo","type":"int","required":true,"default":"1","desc":"测试参数"}
-             * @return {"name":"status","type":"int","required":true,"desc":"测试参数返回值","level":1}
-             * @return {"name":"message","type":"string","required":true,"desc":"返回信息","level":1}
+             * @desc  测试案列
+             * @param {"name":"file","type":"文件类型","required":true,"default":"","desc":"文件"}
+             * @param {"name":"size","type":"int","required":false,"default":"mp4","desc":"大小"}
+             * @param {"name":"name","type":"string","required":false,"default":"名称"}
+             * @return {"name":"code","type":"int","required":true,"desc":"0：成功 1：失败","level":1}
              * @return {"name":"data","type":"array","required":true,"desc":"返回数据","level":1}
-             * @return {"name":"id","type":"string","required":true,"desc":"文章ID(22位字符串)","level":2}
-             * @return {"name":"title","type":"string","required":true,"desc":"文章标题","level":2}
-             * @return {"name":"thumb","type":"string","required":true,"desc":"文章列表图","level":2}
-             * @return {"name":"content","type":"text","required":true,"desc":"文章内容","level":2}
-             * @return {"name":"cate","type":"int","required":true,"desc":"文章分类","level":2}
-             * @return {"name":"tags","type":"array","required":true,"desc":"文章标签","level":2}
-             * @return {"name":"id","type":"string","required":true,"desc":"标签ID","level":3}
-             * @return {"name":"tag","type":"string","required":true,"desc":"标签名称","level":3}
-             * @return {"name":"count","type":"int","required":true,"desc":"标签使用数","level":3}
-             * @return {"name":"img","type":"array","required":true,"desc":"文章组图","level":2}
+             * @return {"name":"url","type":"string","required":true,"desc":"链接","level":2}
+             * @return {"name":"name","type":"string","required":true,"desc":"名称","level":2}
+             * @return {"name":"msg","type":"string","required":true,"desc":"失败提示","level":1}
              */
             public function index(){}
             ...

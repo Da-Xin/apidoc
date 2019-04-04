@@ -51,16 +51,13 @@ class Doc
         $input = input('param.');
         $auth = $this->config['auth'];
         if (isset($input['user']) && !empty($input['user']) && isset($auth[$input['user']]) && isset($input['label']) && !empty($input['label']) && $input['label'] == $auth[$input['user']]) {
+            $url = $this->config['url'];
             $title = $this->config['title'];
             $class = $this->config['class'];
             $list = $data = [];
-            $url = '';
             foreach ($class as $val) {
                 $methods = $this->getMethods($val, 'public');
                 $val_array = explode('\\', $val);
-                if ($val_array['0'] == 'addons') {
-                    $url = $val_array['0'] . '/execute/' . $val_array['1'] . '-' . strtolower($val_array['3']) . '-';
-                }
                 $class_name = end($val_array);
                 // 获取类名称
                 $cinfo = (new ApiDesc())->getDesc($val);
@@ -68,7 +65,6 @@ class Doc
                 foreach ($methods as $k => $v) {
                     // 方法文档信息
                     $info = (new ApiDesc())->getDesc($val, $v);
-                    $info['url'] = $url . $v;
                     $info['name'] = $v;
                     $info['class_name'] = $class_name;
                     $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
@@ -81,6 +77,7 @@ class Doc
             $title = '没有权限访问';
             $list = [];
         }
+        $this->view->assign('url', $url);
         $this->view->assign('list', $list);
         $this->view->assign('title', $title);
         return $this->view->fetch($this->fetch);
