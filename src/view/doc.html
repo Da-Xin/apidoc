@@ -142,7 +142,7 @@
                 </tr>
                 </tbody>
             </table>
-            <table class="table table-hover">
+            <table class="table table-hover" v-if="Object.keys(info.param).length > 0">
                 <caption>接收参数</caption>
                 <thead>
                 <tr class="info">
@@ -164,7 +164,7 @@
                 </tr>
                 </tbody>
             </table>
-            <table class="table table-hover">
+            <table class="table table-hover" v-if="Object.keys(info.return).length > 0">
                 <caption>返回参数</caption>
                 <thead>
                 <tr class="info">
