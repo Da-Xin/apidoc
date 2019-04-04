@@ -64,6 +64,7 @@ class Doc
                 $class_name = end($val_array);
                 // 获取类名称
                 $cinfo = (new ApiDesc())->getDesc($val);
+
                 foreach ($methods as $k => $v) {
                     // 方法文档信息
                     $info = (new ApiDesc())->getDesc($val, $v);
@@ -73,10 +74,9 @@ class Doc
                     $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
                     $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
                     $info['class_path'] = implode('/', $val_array);
-                    $methods[$k] = $info;
+                    $list[] = $info;
                 }
             }
-            $list = $methods;
         } else {
             $title = '没有权限访问';
             $list = [];
