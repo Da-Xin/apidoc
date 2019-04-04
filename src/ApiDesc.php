@@ -101,7 +101,7 @@ class ApiDesc
             if ($item['default'] === null) {
                 $item['default'] = 'NULL';
             } elseif (is_array($item['default'])) {
-                $item['default'] = json_encode($rule['default']);
+                $item['default'] = json_encode($item['default']);
             } elseif (!is_string($item['default'])) {
                 $item['default'] = var_export($item['default'], true);
             }
@@ -128,8 +128,8 @@ class ApiDesc
     public function getDocTag()
     {
         return [
-            "@example" => "例子", "@return" => "返回值", "@param" => "参数", "@version" => "版本信息",
-            "@throws" => "抛出的错误异常", "@title" => "标题", "@desc" => "描述",
+            '@example' => '例子', '@return' => '返回值', '@param' => '参数', '@version' => '版本信息',
+            '@throws' => '抛出的错误异常', '@title' => '标题', '@desc' => '描述', '@request' => '请求方式'
         ];
     }
 }
