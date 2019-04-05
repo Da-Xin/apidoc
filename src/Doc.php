@@ -36,8 +36,10 @@ class Doc
         $auth = $this->config['auth'];
         if (isset($input['user']) && !empty($input['user']) && isset($auth[$input['user']]) && isset($input['label']) && !empty($input['label']) && $input['label'] == $auth[$input['user']]) {
             $url = $this->config['url'];
+            $desc = $this->config['desc'];
             $title = $this->config['title'];
             $class = $this->config['class'];
+            $param = $this->config['param'];
             $list = $data = [];
             foreach ($class as $val) {
                 $methods = $this->getMethods($val, 'public');
@@ -55,16 +57,21 @@ class Doc
                         $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
                         $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
                         $info['class_path'] = implode('/', $val_array);
+                        if(!empty($info['param']) && !empty($param)){
+                            $info['param'] = array_merge($info['param'],$param);
+                        }
                         $list[] = $info;
                     }
                 }
             }
         } else {
             $title = '没有权限访问';
+            $desc = [];
             $list = [];
         }
         $this->view->assign('url', $url);
         $this->view->assign('list', $list);
+        $this->view->assign('desc', $desc);
         $this->view->assign('title', $title);
         return $this->view->fetch('doc');
     }

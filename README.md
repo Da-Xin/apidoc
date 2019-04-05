@@ -19,6 +19,19 @@ ThinkPHP5 文档生成工具
         <?php
         return [
             'title' => "接口文档",
+            'desc' => [             // 注意事项 或 项目说明
+                '注意事项1',
+                '注意事项2',
+            ],
+            'param' => [             // 通用 接收参数
+                [
+                    'name' => 'token',
+                    'type' => 'string',
+                    'required' => true,
+                    'default' => '',
+                    'desc' => '加密参数 字符串且不能为空',
+                ]
+            ],
             'url' => 'http://www.baidu.com',    // 请求链接
             'class' => [
                 'app\index\controller\Index',  // 要生成帮助文档的控制器, 
@@ -56,7 +69,7 @@ ThinkPHP5 文档生成工具
              * @return {"name":"url","type":"string","required":true,"desc":"链接","level":2}
              * @return {"name":"name","type":"string","required":true,"desc":"名称","level":2}
              * @return {"name":"msg","type":"string","required":true,"desc":"失败提示","level":1}
-             */@hidden
+             */
             public function index(){}
             
             /**
