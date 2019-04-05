@@ -10,34 +10,18 @@ class Doc
 {
     private $view;
     private $config;
-    private $fetch;
     private $request;
-
-    private $template = [
-        'type' => 'Think',
-        'view_path' => '',
-        'view_suffix' => 'html',
-        'view_depr' => DIRECTORY_SEPARATOR,
-        'tpl_begin' => '{',
-        'tpl_end' => '}',
-        'taglib_begin' => '{',
-        'taglib_end' => '}',
-    ];
 
     public function __construct()
     {
         if (defined('THINK_VERSION') === false) {
             $this->request = \think\facade\Request::instance();
-            $this->template['view_path'] = __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
-            $this->view = \think\facade\View::instance($this->template, []);
+            $this->view = \think\facade\View::config('view_path', __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR);
             $this->config = \think\facade\Config::get('doc.');
-            $this->fetch = '../../vendor/phpdaxin/apidoc/src/view/doc';
         } else {
             $this->request = \think\Request::instance();
-            $this->template['view_path'] = __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
-            $this->view = \think\View::instance($this->template, []);
+            $this->view = \think\View::instance(['view_path' => __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR], []);
             $this->config = \think\Config::get('doc');
-            $this->fetch = 'doc';
         }
     }
 
@@ -82,7 +66,7 @@ class Doc
         $this->view->assign('url', $url);
         $this->view->assign('list', $list);
         $this->view->assign('title', $title);
-        return $this->view->fetch($this->fetch);
+        return $this->view->fetch('doc');
     }
 
     /**
