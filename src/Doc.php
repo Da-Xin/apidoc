@@ -65,12 +65,14 @@ class Doc
                 foreach ($methods as $k => $v) {
                     // 方法文档信息
                     $info = (new ApiDesc())->getDesc($val, $v);
-                    $info['name'] = $v;
-                    $info['class_name'] = $class_name;
-                    $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
-                    $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
-                    $info['class_path'] = implode('/', $val_array);
-                    $list[] = $info;
+                    if (!empty($info)) {
+                        $info['name'] = $v;
+                        $info['class_name'] = $class_name;
+                        $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
+                        $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
+                        $info['class_path'] = implode('/', $val_array);
+                        $list[] = $info;
+                    }
                 }
             }
         } else {

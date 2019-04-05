@@ -56,8 +56,14 @@ ThinkPHP5 文档生成工具
              * @return {"name":"url","type":"string","required":true,"desc":"链接","level":2}
              * @return {"name":"name","type":"string","required":true,"desc":"名称","level":2}
              * @return {"name":"msg","type":"string","required":true,"desc":"失败提示","level":1}
-             */
+             */@hidden
             public function index(){}
+            
+            /**
+             * 有hidden这个函数会隐藏不会展示在接口列表中
+             * @hidden
+             */
+            public function hidden(){}
             ...
         }
         ```

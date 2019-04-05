@@ -39,6 +39,9 @@ class ApiDesc
                 $content = "";
                 preg_match("/@[a-z]*/i", $v, $tag);
                 if (isset($tag[0]) && array_key_exists($tag[0], $doc_tag)) {
+                    if ($tag[0] == '@hidden') {
+                        return [];
+                    }
                     $pos = stripos($v, $tag[0]) + strlen($tag[0]);
                     if ($pos > 0) {
                         $content = trim(substr($v, $pos));
@@ -49,7 +52,7 @@ class ApiDesc
                         if (isset($doc_tag[$tag[0]]) && empty($content)) {
                             $content = $doc_tag[$tag[0]];
                         }
-                        $result[strtr($tag[0], ["@" => ''])] = $content;
+                        $result[strtr($tag[0], ["@" => ''])] = str_replace('\\', '', $content);
                     }
                 }
             }
@@ -134,7 +137,7 @@ class ApiDesc
         return [
             '@example' => '例子', '@return' => '返回值', '@param' => '参数', '@version' => '版本信息',
             '@throws' => '抛出的错误异常', '@title' => '标题', '@desc' => '描述', '@request' => '请求方式',
-            '@url' => '请求链接'
+            '@url' => '请求链接', '@hidden' => '隐藏',
         ];
     }
 }
