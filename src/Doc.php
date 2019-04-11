@@ -41,17 +41,23 @@ class Doc
             $class = $this->config['class'];
             $param = $this->config['param'];
             $return = $this->config['return'];
+            $ApiDesc = new ApiDesc();
+            if (!empty($return) && !empty($return['data'])) {
+                foreach ($return['data'] as $key => $item) {
+                    $return['data'][$key] = $ApiDesc->getData('', $item);
+                }
+            }
             $list = $data = [];
             foreach ($class as $val) {
                 $methods = $this->getMethods($val, 'public');
                 $val_array = explode('\\', $val);
                 $class_name = end($val_array);
                 // 获取类名称
-                $cinfo = (new ApiDesc())->getDesc($val);
+                $cinfo = $ApiDesc->getDesc($val);
 
                 foreach ($methods as $k => $v) {
                     // 方法文档信息
-                    $info = (new ApiDesc())->getDesc($val, $v);
+                    $info = $ApiDesc->getDesc($val, $v);
                     if (!empty($info)) {
                         $info['name'] = $v;
                         $info['class_name'] = $class_name;
@@ -63,6 +69,7 @@ class Doc
                             $info['param'] = array_merge($info['param'], $param['data']);
                         }
                         if (!in_array($info['class_path'], $return['hidden']) && !empty($return['data'])) {
+
                             $info['return'] = array_merge($return['data'], $info['return']);
                         }
                         $list[] = $info;

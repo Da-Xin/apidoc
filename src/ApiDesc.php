@@ -71,10 +71,12 @@ class ApiDesc
      * @param $item
      * @return array
      */
-    private function getData($key, $item)
+    public function getData($key, $item)
     {
         //过滤传入参数
-        $item = (array)json_decode($item);
+        if (!is_array($item)) {
+            $item = (array)json_decode($item);
+        }
         if (!isset($item['name'])) {
             $item['name'] = '';
         }
