@@ -19,7 +19,7 @@ ThinkPHP5 文档生成工具
         <?php
         return [
             'title' => "接口文档",
-            'url' => 'http://www.baidu.com',    // 请求链接
+            'url' => 'http://www.xxxx.com',    // 请求链接
             'desc' => [             // 注意事项 或 项目说明
                 '注意事项1',
                 '注意事项2',
