@@ -24,7 +24,7 @@ ThinkPHP5 文档生成工具
                 '注意事项1',
                 '注意事项2',
             ],
-            'param' => [             // 通用 接收参数
+            'param' => [    // 通用 接收参数
                 'hidden' => ['index/app/index','index/app/demo'],      // 不用通用参数的函数 格式按照文件地址
                 'data' => [
                     [
@@ -36,7 +36,7 @@ ThinkPHP5 文档生成工具
                     ]
                 ]
             ],
-            'return' => [
+            'return' => [   // 通用 返回参数
                 'hidden' => ['index/app/index','index/app/demo'],      // 不用通用参数的函数 格式按照文件地址
                 'data' => [
                     [
