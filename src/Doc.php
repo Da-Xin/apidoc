@@ -40,6 +40,7 @@ class Doc
             $title = $this->config['title'];
             $class = $this->config['class'];
             $param = $this->config['param'];
+            $return = $this->config['return'];
             $list = $data = [];
             foreach ($class as $val) {
                 $methods = $this->getMethods($val, 'public');
@@ -57,8 +58,12 @@ class Doc
                         $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
                         $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
                         $info['class_path'] = implode('/', $val_array);
-                        if(!empty($info['param']) && !empty($param)){
-                            $info['param'] = array_merge($info['param'],$param);
+
+                        if (!in_array($info['class_path'], $param['hidden']) && !empty($param['data'])) {
+                            $info['param'] = array_merge($info['param'], $param['data']);
+                        }
+                        if (!in_array($info['class_path'], $return['hidden']) && !empty($return['data'])) {
+                            $info['return'] = array_merge($return['data'], $info['return']);
                         }
                         $list[] = $info;
                     }
