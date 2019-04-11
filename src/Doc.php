@@ -42,7 +42,7 @@ class Doc
             $param = $this->config['param'];
             $return = $this->config['return'];
             $ApiDesc = new ApiDesc();
-            if (!empty($return) && !empty($return['data'])) {
+            if (!empty($return) && isset($return['data']) && !empty($return['data'])) {
                 foreach ($return['data'] as $key => $item) {
                     $return['data'][$key] = $ApiDesc->getData('', $item);
                 }
@@ -64,12 +64,16 @@ class Doc
                         $info['class_title'] = isset($cinfo['title']) ? $cinfo['title'] : '';
                         $info['interface'] = ucwords($val_array['0']) . '.' . ucwords($val_array['1']) . '.' . $class_name . '.' . ucwords($v);
                         $info['class_path'] = implode('/', $val_array);
-
-                        if (!in_array($info['class_path'], $param['hidden']) && !empty($param['data'])) {
+                        if (!isset($param['hidden'])) {
+                            $param['hidden'] = [];
+                        }
+                        if (!isset($return['hidden'])) {
+                            $return['hidden'] = [];
+                        }
+                        if (isset($param['data']) && !in_array($info['class_path'], $param['hidden']) && !empty($param['data'])) {
                             $info['param'] = array_merge($info['param'], $param['data']);
                         }
-                        if (!in_array($info['class_path'], $return['hidden']) && !empty($return['data'])) {
-
+                        if (isset($return['data']) && !in_array($info['class_path'], $return['hidden']) && !empty($return['data'])) {
                             $info['return'] = array_merge($return['data'], $info['return']);
                         }
                         $list[] = $info;
