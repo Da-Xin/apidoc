@@ -164,7 +164,7 @@
                 </tr>
                 </tbody>
             </table>
-            <table class="table table-hover" v-if="Object.keys(info.return).length > 0">
+            <table class="table table-hover" style="margin: 0px" v-if="Object.keys(info.return).length > 0">
                 <caption>返回参数</caption>
                 <thead>
                 <tr class="info">
@@ -174,7 +174,7 @@
                     <th>说明</th>
                 </tr>
                 </thead>
-                <tbody style="margin: 0px">
+                <tbody>
                 <tr v-for="(irv, irk) in info.return">
                     <th scope="row" v-html="irv.name"></th>
                     <td class="text-muted" v-html="irv.type"></td>
