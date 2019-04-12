@@ -1,7 +1,4 @@
 <?php
-/**
- * 自动生成文档类
- */
 
 namespace PhpApiDoc\ApiDocSrc;
 
@@ -26,9 +23,9 @@ class Doc
     }
 
     /**
-     * 接口的列表页
-     * @author opqnext
-     * @date 2017-8-15
+     *  接口的列表页
+     * @return mixed
+     * @throws \ReflectionException
      */
     public function get()
     {
@@ -49,7 +46,7 @@ class Doc
             }
             $list = $data = [];
             foreach ($class as $val) {
-                $methods = $this->getMethods($val, 'public');
+                $methods = $this->getMethods($val, ['public']);
                 $val_array = explode('\\', $val);
                 $class_name = end($val_array);
                 // 获取类名称
@@ -92,56 +89,33 @@ class Doc
         return $this->view->fetch('doc');
     }
 
+
     /**
-     * 获取类中非继承方法和重写方法
-     * 只获取在本类中声明的方法，包含重写的父类方法，其他继承自父类但未重写的，不获取
-     * 例
-     * class A{
-     *      public function a1(){}
-     *      public function a2(){}
-     * }
-     * class B extends A{
-     *      public function b1(){}
-     *      public function a1(){}
-     * }
-     * getMethods('B')返回方法名b1和a1，a2虽然被B继承了，但未重写，故不返回
-     * @param string $classname 类名
-     * @param string $access public or protected  or private or final 方法的访问权限
-     * @return array(methodname=>access)  or array(methodname) 返回数组，如果第二个参数有效，
-     * 则返回以方法名为key，访问权限为value的数组
-     * @see  使用了命名空间，故在new 时类前加反斜线；如果此此函数不是作为类中方法使用，可能由于权限问题，
-     *   只能获得public方法
+     * @param $classname            列名称
+     * @param array $access 访问形式数组 如：['public'，'protected'，'private'，'abstract','constructor','destructor','final','static']
+     *      abstract:抽象方法, constructor:构造方法, destructor:析构方法, final:定义final, private:私有方法, protected:保护方法
+     *      public:公开方法, static:静态方法
+     * @return mixed
+     * @throws \ReflectionException
      */
-    public function getMethods($classname, $access = null)
+    public function getMethods($classname, $access = ['public'])
     {
         $class = new \ReflectionClass($classname);
         $methods = $class->getMethods();
-        $returnArr = [];
-        foreach ($methods as $value) {
-            if ($value->class == $classname) {
-                if ($access != null) {
-                    $methodAccess = new \ReflectionMethod($classname, $value->name);
-
-                    switch ($access) {
-                        case 'public':
-                            if ($methodAccess->isPublic()) array_push($returnArr, $value->name);
-                            break;
-                        case 'protected':
-                            if ($methodAccess->isProtected()) array_push($returnArr, $value->name);
-                            break;
-                        case 'private':
-                            if ($methodAccess->isPrivate()) array_push($returnArr, $value->name);
-                            break;
-                        case 'final':
-                            if ($methodAccess->isFinal()) $returnArr[$value->name] = 'final';
-                            break;
-                    }
-                } else {
-                    array_push($returnArr, $value->name);
-                }
-
+        $search = array_column($methods, 'class');
+        $data = [];
+        while (($key = array_search($classname, $search)) !== false) {
+            if (in_array('public', $access) && $methods[$key]->isPublic()) {
+                array_push($data, $methods[$key]->getName());
+            } elseif (in_array('protected', $access) && $methods[$key]->isProtected()) {
+                array_push($data, $methods[$key]->getName());
+            } elseif (in_array('private', $access) && $methods[$key]->isPrivate()) {
+                array_push($data, $methods[$key]->getName());
+            } elseif (in_array('final', $access) && $methods[$key]->isFinal()) {
+                $data[$methods[$key]->getName()] = 'final';
             }
+            unset($search[$key]);
         }
-        return $returnArr;
+        return $data;
     }
 }
