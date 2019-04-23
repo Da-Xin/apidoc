@@ -67,10 +67,10 @@ class Doc
                         if (!isset($return['hidden'])) {
                             $return['hidden'] = [];
                         }
-                        if (isset($param['data']) && !in_array($info['class_path'], $param['hidden']) && !empty($param['data'])) {
+                        if (isset($param['data']) && !empty($param['data']) && !in_array($info['class_path'], $param['hidden']) && !in_array($info['class_path'] . '/' . $info['name'], $param['hidden'])) {
                             $info['param'] = array_merge($info['param'], $param['data']);
                         }
-                        if (isset($return['data']) && !in_array($info['class_path'], $return['hidden']) && !empty($return['data'])) {
+                        if (isset($return['data']) && !empty($return['data']) && !in_array($info['class_path'], $return['hidden']) && !in_array($info['class_path'] . '/' . $info['name'], $return['hidden'])) {
                             $info['return'] = array_merge($return['data'], $info['return']);
                         }
                         $list[] = $info;

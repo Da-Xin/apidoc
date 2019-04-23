@@ -25,7 +25,10 @@ ThinkPHP5 文档生成工具
                 '注意事项2',
             ],
             'param' => [    // 通用 接收参数
-                'hidden' => ['index/app/index','index/app/demo'],      // 不用通用参数的函数 格式按照文件地址
+                // 不用通用接收参数 如：文件地址：app/index/controller/index 方法名称：index(),demo() ...等等
+                // 1.整个class：app/index/controller/index(文件地址)
+                // 2.单个函数：app/index/controller/index/demo(文件地址/方法名称)
+                'hidden' => ['app/index/controller/index'],
                 'data' => [
                     [
                         'name' => 'token',
@@ -37,7 +40,10 @@ ThinkPHP5 文档生成工具
                 ]
             ],
             'return' => [   // 通用 返回参数
-                'hidden' => ['index/app/index','index/app/demo'],      // 不用通用参数的函数 格式按照文件地址
+                // 不用通用返回参数 如：文件地址：app/index/controller/index 方法名称：index(),demo() ...等等
+                // 1.整个class：app/index/controller/index(文件地址)
+                // 2.单个函数：app/index/controller/index/demo(文件地址/方法名称)
+                'hidden' => ['app/index/controller/index/demo'],      // 
                 'data' => [
                     [
                         'name' => 'code',
