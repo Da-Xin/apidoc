@@ -81,11 +81,10 @@
     <div class="row" style="margin: 10px 0 0 10px">
         <div class="col-md-5">
             <label>
-                <span class="text-muted" style="font-size: 26px;">{$title}
-                    <template v-if="Object.keys(doc_info.desc).length > 0">
-                        <span style="font-size: 18px;color: #c7254e;" v-for="(ipv, ipk) in doc_info.desc">{{ipk}}、{{ipv}}</span>
-                    </template>
-                </span>
+                <span class="text-muted" style="font-size: 26px;">{$title}</span>
+                <template v-if="doc_info.desc.length > 0">
+                    <span style="font-size: 16px;color: #c7254e;font-weight: bold;">&ensp;{{doc_info.desc}}</span>
+                </template>
             </label>
         </div>
         <div class="col-md-4">
@@ -118,26 +117,22 @@
             <div class="col-xs-7" style="min-width: 520px;" v-if="Object.keys(api_info).length > 0">
                 <H1 style="margin-top: 0px;"><kbd class="code">{{api_info.title}}</kbd></H1>
                 <table class="table table-bordered table-hover">
-                    <tr>
-                        <th class="info" style="width: 80px">请求接口</th>
-                        <th><code class="code">{{doc_info.url}}/{{api_info.url}}</code></th>
-                    </tr>
                     <tbody>
                     <tr>
-                        <th class="info">文件地址</th>
-                        <th><code class="code">{{api_info.class_path}}</code></th>
-                    </tr>
-                    <tr>
+                        <th class="info">请求方式</th>
+                        <th><code class="code">{{api_info.request}}</code></th>
                         <th class="info">方法名称</th>
                         <th><code class="code">{{api_info.name}}()</code></th>
                     </tr>
                     <tr>
-                        <th class="info">请求方式</th>
-                        <th><code class="code">{{api_info.request}}</code></th>
+                        <th class="info" style="width: 80px">请求接口</th>
+                        <th ><code class="code">{{doc_info.url}}/{{api_info.url}}</code></th>
+                        <th class="info">文件地址</th>
+                        <th><code class="code">{{api_info.class_path}}</code></th>
                     </tr>
                     <tr>
                         <th class="info">信息说明</th>
-                        <th><code>{{api_info.desc}}</code></th>
+                        <th colspan="3"><code>{{api_info.desc}}</code></th>
                     </tr>
                     </tbody>
                 </table>

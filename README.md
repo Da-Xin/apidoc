@@ -20,10 +20,7 @@ ThinkPHP5 文档生成工具
         return [
             'title' => "接口文档",
             'url' => 'http://www.xxxx.com',    // 请求链接
-            'desc' => [             // 注意事项 或 项目说明
-                '注意事项1',
-                '注意事项2',
-            ],
+            'desc' => '1.注意事项;2.项目说明',  // 注意事项 或 项目说明
             'header'=>[     // 通用 请求头参数
                 // 不用通用接收参数 如：文件地址：app/index/controller/index 方法名称：index(),demo() ...等等
                 // 1.整个class：app/index/controller/index(文件地址)
