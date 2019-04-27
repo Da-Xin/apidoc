@@ -24,6 +24,22 @@ ThinkPHP5 文档生成工具
                 '注意事项1',
                 '注意事项2',
             ],
+            'header'=>[     // 通用 请求头参数
+                // 不用通用接收参数 如：文件地址：app/index/controller/index 方法名称：index(),demo() ...等等
+                // 1.整个class：app/index/controller/index(文件地址)
+                // 2.单个函数：app/index/controller/index/demo(文件地址/方法名称)
+                'hidden' => ['app/index/controller/index'],
+                'data' => [
+                    [
+                        'name' => 'id',
+                        'type' => 'string',
+                        'required' => true,
+                        'default' => '',
+                        'desc' => '加密参数 字符串且不能为空',
+                    ]
+                ]
+            
+            ]
             'param' => [    // 通用 接收参数
                 // 不用通用接收参数 如：文件地址：app/index/controller/index 方法名称：index(),demo() ...等等
                 // 1.整个class：app/index/controller/index(文件地址)
@@ -89,6 +105,7 @@ ThinkPHP5 文档生成工具
              * @url 连接
              * @request GET
              * @desc  测试案列
+             * @header {"name":"id","type":"int","required":true,"default":"","desc":"ID"}
              * @param {"name":"file","type":"文件类型","required":true,"default":"","desc":"文件"}
              * @param {"name":"size","type":"int","required":false,"default":"mp4","desc":"大小"}
              * @param {"name":"name","type":"string","required":false,"default":"名称"}

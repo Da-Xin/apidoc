@@ -78,14 +78,13 @@ class Doc
                 }
             }
         } else {
+            $url = '';
             $title = '没有权限访问';
             $desc = [];
             $list = [];
         }
-        $this->view->assign('url', $url);
-        $this->view->assign('list', $list);
-        $this->view->assign('desc', $desc);
         $this->view->assign('title', $title);
+        $this->view->assign('doc_info', ['url' => $url, 'list' => $list, 'desc' => $desc, 'title' => $title]);
         return $this->view->fetch('doc');
     }
 

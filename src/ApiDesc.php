@@ -46,7 +46,7 @@ class ApiDesc
                     if ($pos > 0) {
                         $content = trim(substr($v, $pos));
                     }
-                    if ($content && ($tag[0] == '@param' || $tag[0] == '@return')) {
+                    if ($content && ($tag[0] == '@param' || $tag[0] == '@return' || $tag[0] == '@header')) {
                         $result[strtr($tag[0], ["@" => ''])][] = $this->getData($tag[0], $content);
                     } else {
                         if (isset($doc_tag[$tag[0]]) && empty($content)) {
@@ -57,7 +57,7 @@ class ApiDesc
                 }
             }
             if (!empty($method)) {
-                $result = array_merge($result, array_diff_key(['title' => '未配置', 'request' => '未配置', 'url' => '未配置', 'desc' => '未配置', 'param' => [], 'return' => []], $result));
+                $result = array_merge($result, array_diff_key($this->getDocDefault(), $result));
             }
             return $result;
         } else {
@@ -102,8 +102,7 @@ class ApiDesc
             $item['desc'] = '';
         }
         $item['desc'] = trim($item['desc']);
-
-        if ($key == '@param') {
+        if ($key == '@param' || $key == '@header') {
             if (!isset($item['default'])) {
                 $item['default'] = '';
             }
@@ -119,10 +118,19 @@ class ApiDesc
     }
 
     /**
+     * 获取 没个接口默认值
+     * @return array
+     */
+    public function getDocDefault()
+    {
+        return ['title' => '未配置', 'request' => '未配置', 'url' => '未配置', 'desc' => '未配置', 'header' => [], 'param' => [], 'return' => []];
+    }
+
+    /**
      * 获取 数据类型
      * @return array
      */
-    public function getDataType()
+    private function getDataType()
     {
         return [
             'string' => '字符串', 'int' => '整型', 'float' => '浮点型', 'boolean' => '布尔型', 'date' => '日期',
@@ -134,12 +142,12 @@ class ApiDesc
      * 获取 文档标示
      * @return array
      */
-    public function getDocTag()
+    private function getDocTag()
     {
         return [
             '@example' => '例子', '@return' => '返回值', '@param' => '参数', '@version' => '版本信息',
             '@throws' => '抛出的错误异常', '@title' => '标题', '@desc' => '描述', '@request' => '请求方式',
-            '@url' => '请求链接', '@hidden' => '隐藏',
+            '@url' => '请求链接', '@hidden' => '隐藏', '@header' => '请求头'
         ];
     }
 }
