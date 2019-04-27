@@ -7,8 +7,7 @@ ThinkPHP5 文档生成工具
 
 使用说明
 
-    1.安装：composer require "phpdaxin/apidoc:dev-master" //
-        安装：composer require phpdaxin/apidoc  //正式版
+    1.安装：composer require phpdaxin/apidoc
         更新 composer update phpdaxin/apidoc
         删除 composer remove phpdaxin/apidoc
     
