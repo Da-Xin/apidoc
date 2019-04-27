@@ -84,7 +84,7 @@ class Doc
             $list = [];
         }
         $this->view->assign('title', $title);
-        $this->view->assign('doc_info', ['url' => $url, 'list' => $list, 'desc' => $desc, 'title' => $title]);
+        $this->view->assign('doc_info', ['url' => $url, 'list' => $list, 'desc' => $desc]);
         return $this->view->fetch('doc');
     }
 
