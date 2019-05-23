@@ -13,11 +13,11 @@ class Doc
     {
         if (defined('THINK_VERSION') === false) {
             $this->request = \think\facade\Request::instance();
-            $this->view = \think\facade\View::config('view_path', __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR);
+            $this->view = \think\facade\View::config('view_path', __DIR__ . DIRECTORY_SEPARATOR);
             $this->config = \think\facade\Config::get('doc.');
         } else {
             $this->request = \think\Request::instance();
-            $this->view = \think\View::instance(['view_path' => __DIR__ . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR], []);
+            $this->view = \think\View::instance(['view_path' => __DIR__ . DIRECTORY_SEPARATOR], []);
             $this->config = \think\Config::get('doc');
         }
     }
