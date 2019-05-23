@@ -1,210 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>{$title}</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <style>
-        ul.nav-tabs {
-            width: 200px;
-            margin-top: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        .el-header {
+            color: #777;
+            font-size: 26px;
+            text-align: left;
+            line-height: 60px;
+            font-weight: bolder;
+            border-bottom: 1px solid #EBEEF5;
         }
 
-        ul.nav-tabs li {
-            margin: 0;
-            border-top: 1px solid #ddd;
-        }
-
-        ul.nav-tabs li:first-child {
-            border-top: none;
-        }
-
-        ul.nav-tabs li a {
-            margin: 0;
-            padding: 8px 16px;
-            border-radius: 0;
-        }
-
-        ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
-            color: #fff;
-            background: #0088cc;
-            border: 1px solid #0088cc;
-        }
-
-        ul.nav-tabs li:first-child a {
-            border-radius: 4px 4px 0 0;
-        }
-
-        ul.nav-tabs li:last-child a {
-            border-radius: 0 0 4px 4px;
-        }
-
-        ul.nav-tabs.affix {
-            top: 30px;
-        }
-
-        .class-div {
-            width: 40%;
-            height: 35px;
-            padding: 0px 0px 0px 10px;
-            float: left;
-            display: grid;
-        }
-
-        .class-a {
+        .info-desc {
+            color: #c7254e;
             font-size: 16px;
+            font-weight: bold;
         }
 
-        .function-div {
-            margin: 10px 0px 10px 20px;
-            float: left;
+        .search {
+            width: 36%;
         }
 
-        .function-a {
-            height: 35px;
-            display: inline;
-            float: left;
+        .el-aside th, .el-main-th th {
+            color: #333;
+            background-color: #d9edf7;
+        }
+
+        .el-aside th .cell {
+            font-size: 20px;
+            padding-left: 6px;
+        }
+
+        .el-main {
+            padding: 0px 6px;
+            overflow: hidden;
+        }
+
+        .info-tname {
+            color: #FFF;
+            height: 48px;
+            padding: 10px;
+            font-size: 32px;
+            border-color: #333;
+            background-color: #333;
+        }
+
+        .info-table {
+            border: 1px solid #ddd;
+            width: 100%;
+            font-size: 14px;
+            margin-top: 10px;
+            border-right: 0px;
+            border-bottom: 0px;
+            border-spacing: 0px;
+        }
+
+        .info-table th {
+            padding: 5px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-table .info-title {
+            background-color: #d9edf7;
+        }
+
+        .info-table .info-value {
+            color: #c7254e;
+            padding: 5px;
+            font-size: 90%;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        .el-main-th {
+            margin-top: 10px;
+        }
+
+        .el-main td {
+            padding: 3px 0px;
             font-size: 14px;
         }
 
-        .code {
-            font-size: 100%;
+        .info-required {
+            color: #FFF;
+            padding: 3px 7px;
+            line-height: 18px;
+        }
+
+        .info-isreq {
+            border-color: #d43f3a;
+            background-color: #d43f3a;
+        }
+
+        .info-noreq {
+            border-color: #333;
+            background-color: #333;
+        }
+
+        .info-name {
+            color: #333;
+            font-weight: bold;
         }
     </style>
 </head>
-<body>
-<div id="class-list">
-    <div class="row" style="margin: 10px 0 0 10px">
-        <div class="col-md-5">
-            <label>
-                <span class="text-muted" style="font-size: 26px;">{$title}</span>
-                <template v-if="doc_info.desc.length > 0">
-                    <span style="font-size: 16px;color: #c7254e;font-weight: bold;">&ensp;{{doc_info.desc}}</span>
+<body style='font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;'>
+<div id="app">
+    <el-container>
+        <el-header>
+            <el-row>
+                <el-col :span="16"><div class="grid-content bg-purple"><span class="info-title">{$title}</span><template v-if="doc_info.desc.length > 0"><span class="info-desc">&ensp;{{doc_info.desc}}</span></template></div></el-col>
+                <el-col :span="8"><div class="grid-content bg-purple-light"><el-input class="search" v-model="search" placeholder="搜索：接口名称/函数名/类名"></el-input></div></el-col>
+            </el-row>
+        </el-header>
+        <el-container>
+            <el-aside width="40%">
+                <template v-if="Object.keys(getlist).length > 0">
+                    <el-table :data="getlist" @row-click="details">
+                        <!--                    <el-table-column prop="interface" label="接口服务"></el-table-column>-->
+                        <el-table-column prop="title" label="接口名称"></el-table-column>
+                        <el-table-column prop="desc" label="接口备注"></el-table-column>
+                    </el-table>
                 </template>
-            </label>
-        </div>
-        <div class="col-md-4">
-            <div class="col-md-6">
-                <input type="text" v-model="search" class="col-md-4 form-control" placeholder="搜索：接口名称/函数名/类名">
-            </div>
-        </div>
-    </div>
-    <hr style="color: #9d9d9d;width: 100%;margin-top: 5px;margin-bottom: 8px;">
-    <div v-if="Object.keys(getlist).length > 0">
-        <div class="container row" style="width: 100%;min-width: 1210px;">
-            <div class="alert class-div">
-                <table class="table table-hover">
-                    <thead>
-                    <tr class="info" style="font-size: 20px;">
-                        <!--<th style="width: 268px;">接口服务</th>-->
-                        <th style="width: 50%;">接口名称</th>
-                        <th>接口备注</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="AddonsShakefootball" v-for="(value, key) in getlist" @click="details(value)">
-                        <!--<td scope="row" >{{value.interface}}</td>-->
-                        <td class="text-muted" style="font-weight: bold;color: #333;">{{value.title}}</td>
-                        <td class="text-muted">{{value.desc}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-7" style="min-width: 520px;" v-if="Object.keys(api_info).length > 0">
-                <H1 style="margin-top: 0px;"><kbd class="code">{{api_info.title}}</kbd></H1>
-                <table class="table table-bordered table-hover">
-                    <tbody>
-                    <tr>
-                        <th class="info" style="width: 80px;min-width: 80px;">请求方式</th>
-                        <th><code class="code">{{api_info.request}}</code></th>
-                        <th class="info" style="width: 80px;min-width: 80px;">方法名称</th>
-                        <th><code class="code">{{api_info.name}}()</code></th>
-                    </tr>
-                    <tr>
-                        <th class="info" style="width: 80px;min-width: 80px;">请求接口</th>
-                        <th ><code class="code">{{doc_info.url}}/{{api_info.url}}</code></th>
-                        <th class="info" style="width: 80px;min-width: 80px;">文件地址</th>
-                        <th><code class="code">{{api_info.class_path}}</code></th>
-                    </tr>
-                    <tr>
-                        <th class="info" style="width: 80px;min-width: 80px;">信息说明</th>
-                        <th colspan="3"><code>{{api_info.desc}}</code></th>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table table-hover" v-if="Object.keys(api_info.header).length > 0">
-                    <caption>请求头参数</caption>
-                    <thead>
-                    <tr class="info">
-                        <th>字段名称</th>
-                        <th>字段类型</th>
-                        <th>是否必须</th>
-                        <th>说明</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(ipv, ipk) in api_info.header">
-                        <th scope="row">{{ipv.name}}</th>
-                        <td class="text-muted">{{ipv.type}}</td>
-                        <td v-if="ipv.required == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
-                        <td v-else><kbd>否</kbd></td>
-                        <td class="text-muted">{{ipv.desc}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table table-hover" v-if="Object.keys(api_info.param).length > 0">
-                    <caption>接收参数</caption>
-                    <thead>
-                    <tr class="info">
-                        <th>字段名称</th>
-                        <th>字段类型</th>
-                        <th>是否必须</th>
-                        <th>默认值</th>
-                        <th>说明</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(ipv, ipk) in api_info.param">
-                        <th scope="row">{{ipv.name}}</th>
-                        <td class="text-muted">{{ipv.type}}</td>
-                        <td v-if="ipv.required == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
-                        <td v-else><kbd>否</kbd></td>
-                        <td>{{ipv.default}}</td>
-                        <td class="text-muted">{{ipv.desc}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table table-hover" style="margin: 0px" v-if="Object.keys(api_info.return).length > 0">
-                    <caption>返回参数</caption>
-                    <thead>
-                    <tr class="info">
-                        <th>字段名称</th>
-                        <th>字段类型</th>
-                        <th>是否必须</th>
-                        <th>说明</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(irv, irk) in api_info.return">
-                        <th scope="row" v-html="irv.name"></th>
-                        <td class="text-muted" v-html="irv.type"></td>
-                        <td v-if="irv.required == true"><code style="color: #fff;background-color: #d43f3a">是</code></td>
-                        <td v-else><kbd>否</kbd></td>
-                        <td class="text-muted" v-html="irv.desc"></td>
-                    </tr>
-                </table>
-                <hr style="margin: 0px"/>
-            </div>
-        </div>
-    </div>
+            </el-aside>
+            <el-main>
+                <template v-if="Object.keys(api_info).length > 0">
+                    <el-tag size="medium" class="info-tname">{{api_info.title}}</el-tag>
+                    <table class="info-table">
+                        <tbody>
+                        <tr>
+                            <th class="info-title" style="width: 80px;min-width: 80px;">请求方式</th>
+                            <th><div class="info-value">{{api_info.request}}</div></th>
+                            <th class="info-title" style="width: 80px;min-width: 80px;">方法名称</th>
+                            <th><div class="info-value">{{api_info.name}}()</div></th>
+                        </tr>
+                        <tr>
+                            <th class="info-title" style="width: 80px;min-width: 80px;">请求接口</th>
+                            <th><div class="info-value">{{doc_info.url}}/{{api_info.url}}</div></th>
+                            <th class="info-title" style="width: 80px;min-width: 80px;">文件地址</th>
+                            <th><div class="info-value">{{api_info.class_path}}</div></th>
+                        </tr>
+                        <tr>
+                            <th class="info-title" style="width: 80px;min-width: 80px;">信息说明</th>
+                            <th colspan="3"><div class="info-value">{{api_info.desc}}</div></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <template v-if="Object.keys(api_info.header).length > 0">
+                        <el-table :data="api_info.header" class="el-main-th">
+                            <el-table-column prop="name" label="字段名称"></el-table-column>
+                            <el-table-column prop="type" label="字段类型"></el-table-column>
+                            <el-table-column prop="required" label="是否必须"></el-table-column>
+                            <el-table-column prop="desc" label="说明"></el-table-column>
+                        </el-table>
+                    </template>
+                    <template v-if="Object.keys(api_info.param).length > 0">
+                        <el-table :data="api_info.param" class="el-main-th">
+                            <el-table-column label="字段名称" width="180" max-width="180">
+                                <template slot-scope="item"><div class="info-name">{{item.row.name}}</div></template>
+                            </el-table-column>
+                            <el-table-column prop="type" label="字段类型" width="80" max-width="80"></el-table-column>
+                            <el-table-column label="是否必须" width="80" max-width="80">
+                                <template slot-scope="item">
+                                    <el-tag size="medium" class="info-required info-isreq" v-if="item.row.required == true">是</el-tag>
+                                    <el-tag size="medium" class="info-required info-noreq" v-else>否</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="default" label="默认值" width="120" max-width="120"></el-table-column>
+                            <el-table-column prop="desc" label="说明"></el-table-column>
+                        </el-table>
+                    </template>
+                    <template v-if="Object.keys(api_info.return).length > 0">
+                        <el-table :data="api_info.return" class="el-main-th">
+                            <el-table-column label="字段名称" width="360" max-width="360">
+                                <template slot-scope="item">
+                                    <div class="info-name">
+                                        <div v-if="item.row.level == 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.row.name}}</div>
+                                        <div v-else-if="item.row.level == 3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.row.name}}</div>
+                                        <div v-else>{{item.row.name}}</div>
+                                    </div>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="type" label="字段类型" width="80" max-width="80"></el-table-column>
+                            <el-table-column label="是否必须" width="80" max-width="80">
+                                <template slot-scope="item">
+                                    <el-tag size="medium" class="info-required info-isreq" v-if="item.row.required == true">是</el-tag>
+                                    <el-tag size="medium" class="info-required info-noreq" v-else>否</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="desc" label="说明"></el-table-column>
+                        </el-table>
+                    </template>
+                </template>
+            </el-main>
+        </el-container>
+    </el-container>
 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
     new Vue({
-        el: '#class-list',
+        el: '#app',
         data: {
             doc_info: JSON.parse('{:json_encode($doc_info,true)}'),
             api_info: {},
@@ -212,15 +212,16 @@
         },
         computed: {
             getlist() {
-                var slist = [];
-                var glthis = this;
+                let slist = [];
+                let glthis = this;
                 glthis.doc_info.list.map(function (item) {
                     if (item.name.search(glthis.search) != -1 || item.title.search(glthis.search) != -1 || item.class_name.search(glthis.search) != -1) {
                         slist.push(item);
                     }
                 });
                 return slist;
-            }
+            },
+
         },
         methods: {
             // 弃用
@@ -228,7 +229,7 @@
                 if (document.getElementById('classtitle' + (item + 1)) == null) {
                     return;
                 }
-                var calsslist = document.getElementById('classtitle' + (item + 1)).classList;
+                let calsslist = document.getElementById('classtitle' + (item + 1)).classList;
                 if (JSON.stringify(calsslist).indexOf('hide') > 0) {
                     calsslist.remove('hide');
                     calsslist.add('show');
@@ -239,10 +240,14 @@
             },
             // 详情
             details: function (item) {
+                console.log(item);
+                let info =[];
                 this.api_info = item;
             },
+            demo:function (row, column, cellValue, index) {
+                console.log(row, column, cellValue, index);
+            }
         }
     })
 </script>
-</body>
 </html>
