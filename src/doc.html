@@ -183,8 +183,8 @@
                             <el-table-column label="字段名称" width="360" max-width="360">
                                 <template slot-scope="item">
                                     <div class="info-name">
-                                        <div v-if="item.row.level == 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.row.name}}</div>
-                                        <div v-else-if="item.row.level == 3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.row.name}}</div>
+                                        <div v-if="item.row.level == 2" v-html="item.row.name"></div>
+                                        <div v-else-if="item.row.level == 3" v-html="item.row.name"></div>
                                         <div v-else>{{item.row.name}}</div>
                                     </div>
                                 </template>

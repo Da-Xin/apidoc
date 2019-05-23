@@ -81,7 +81,7 @@ class ApiDesc
             $item['name'] = '';
         }
         if (isset($item['level']) && !empty($item['level']) && !empty($item['name']) && $item['level'] > 1) {
-            $item['name'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', ($item['level'] - 1)) . $item['name'];
+            $item['name'] = str_repeat('&emsp;&emsp;', ($item['level'] - 1)) . $item['name'];
         }
 
         if (!isset($item['type'])) {
