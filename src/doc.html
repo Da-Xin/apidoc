@@ -77,10 +77,6 @@
             border-radius: 5px;
         }
 
-        .el-main-th {
-            margin-top: 10px;
-        }
-
         .el-main td {
             padding: 3px 0px;
             font-size: 14px;
@@ -101,7 +97,12 @@
             border-color: #333;
             background-color: #333;
         }
-
+        .info-div-title{
+            color: #777;
+            padding: 10px 0px 3px 3px;
+            font-size: 18px;
+            text-align: left;
+        }
         .info-name {
             color: #333;
             font-weight: bold;
@@ -151,6 +152,7 @@
                         </tbody>
                     </table>
                     <template v-if="Object.keys(api_info.header).length > 0">
+                        <div class="info-div-title">请求头参数</div>
                         <el-table :data="api_info.header" class="el-main-th">
                             <el-table-column prop="name" label="字段名称"></el-table-column>
                             <el-table-column prop="type" label="字段类型" width="80" max-width="80"></el-table-column>
@@ -164,6 +166,7 @@
                         </el-table>
                     </template>
                     <template v-if="Object.keys(api_info.param).length > 0">
+                        <div class="info-div-title">接收参数</div>
                         <el-table :data="api_info.param" class="el-main-th">
                             <el-table-column label="字段名称" width="180" max-width="180">
                                 <template slot-scope="item"><div class="info-name">{{item.row.name}}</div></template>
@@ -180,6 +183,7 @@
                         </el-table>
                     </template>
                     <template v-if="Object.keys(api_info.return).length > 0">
+                        <div class="info-div-title">返回参数</div>
                         <el-table :data="api_info.return" class="el-main-th">
                             <el-table-column label="字段名称" width="360" max-width="360">
                                 <template slot-scope="item">
