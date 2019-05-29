@@ -127,6 +127,35 @@ class ApiDesc
     }
 
     /**
+     * 获取 文件扩展
+     * @param $ext
+     * @return mixed|string
+     */
+    public function getExtInfo($ext)
+    {
+        $exts = [
+            'xml' => 'application/xml,text/xml,application/x-xml',
+            'json' => 'application/json,text/x-json,application/jsonrequest,text/json',
+            'js' => 'text/javascript,application/javascript,application/x-javascript',
+            'css' => 'text/css',
+            'rss' => 'application/rss+xml',
+            'yaml' => 'application/x-yaml,text/yaml',
+            'atom' => 'application/atom+xml',
+            'pdf' => 'application/pdf',
+            'text' => 'text/plain',
+            'png' => 'image/png',
+            'jpg' => 'image/jpg,image/jpeg,image/pjpeg',
+            'gif' => 'image/gif',
+            'csv' => 'text/csv',
+            'html' => 'text/html,application/xhtml+xml,*/*',
+        ];
+        if (isset($exts[$ext]) && !empty($exts[$ext])) {
+            return $exts[$ext];
+        }
+        return 'text/html';
+    }
+
+    /**
      * 获取 数据类型
      * @return array
      */

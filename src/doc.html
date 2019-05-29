@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{$title}</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>{$info['title']}</title>
+    <link rel="stylesheet" href="{$info['path']}element-ui.css">
     <style>
         .el-header {
             color: #777;
@@ -114,7 +114,7 @@
     <el-container>
         <el-header>
             <el-row>
-                <el-col :span="16"><div class="grid-content bg-purple"><span class="info-title">{$title}</span><template v-if="doc_info.desc.length > 0"><span class="info-desc">&ensp;{{doc_info.desc}}</span></template></div></el-col>
+                <el-col :span="16"><div class="grid-content bg-purple"><span class="info-title">{$info['title']}</span><template v-if="doc_info.desc.length > 0"><span class="info-desc">&ensp;{{doc_info.desc}}</span></template></div></el-col>
                 <el-col :span="8"><div class="grid-content bg-purple-light"><el-input class="search" v-model="search" placeholder="搜索：接口名称/函数名/类名"></el-input></div></el-col>
             </el-row>
         </el-header>
@@ -210,8 +210,8 @@
     </el-container>
 </div>
 </body>
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="{$info['path']}vue.js"></script>
+<script src="{$info['path']}element-ui.js"></script>
 <script>
     new Vue({
         el: '#app',

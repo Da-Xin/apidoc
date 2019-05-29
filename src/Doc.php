@@ -83,11 +83,16 @@ class Doc
             $desc = [];
             $list = [];
         }
-        $this->view->assign('title', $title);
+        $this->view->assign('info', ['path' => 'getScript/', 'title' => $title]);
         $this->view->assign('doc_info', ['url' => $url, 'list' => $list, 'desc' => $desc]);
         return $this->view->fetch('doc');
     }
 
+    public function getScript()
+    {
+        $content = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'styles' . DIRECTORY_SEPARATOR . str_replace('getScript/', '', $this->request->pathinfo()));
+        return response($content, 200, ['Content-Length' => strlen($content)])->contentType((new ApiDesc())->getExtInfo($this->request->ext()));
+    }
 
     /**
      * @param $classname            列名称

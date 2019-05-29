@@ -1,4 +1,4 @@
-ThinkPHP5 文档生成工具(CDN加载CSS和JS)
+ThinkPHP5 文档生成工具(本地加载CSS和JS)
 
     访问地址:配置的域名/doc?user=user&label=label
         user：用户
