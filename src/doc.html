@@ -40,6 +40,10 @@
             overflow: hidden;
         }
 
+        .list-el-table td {
+            padding: 8px 0;
+        }
+
         .info-tname {
             color: #FFF;
             height: 48px;
@@ -121,7 +125,7 @@
         <el-container>
             <el-aside width="40%">
                 <template v-if="Object.keys(getlist).length > 0">
-                    <el-table :data="getlist" @row-click="details">
+                    <el-table :data="getlist" @row-click="details" class="list-el-table">
                         <!--                    <el-table-column prop="interface" label="接口服务"></el-table-column>-->
                         <el-table-column prop="title" label="接口名称"></el-table-column>
                         <el-table-column prop="desc" label="接口备注"></el-table-column>
